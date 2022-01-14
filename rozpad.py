@@ -1,14 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 import sys
 import os
 sys.path.append(os.getcwd())
 
 # =========== Config grafov =========
 save_fig = True
-folder = ''  # 'Kyvadlo/URO/prve/'
+folder = ''
 figName = folder + 'rozpad'
 figNameNum = 1
 exec_file = 'fig_system.py'
@@ -29,13 +28,11 @@ timevector = np.linspace(0, tau*4, 1001)
 
 y = Q0 * np.exp(-k*timevector)
 
-# plt.plot(timevector/(365*24*60*60), Q)
-# plt.grid()
-# plt.xlabel('t [s]')
-# plt.ylabel('Q(t)')
-# plt.show()
-
+# prevod sec. -> rok
 t = timevector/(365*24*60*60)
+
+y_pol = y[find_nearest(y, Q0/2)]
+t_pol = t[find_nearest(y, Q0/2)]
 
 if save_fig:
     exec(open('misc/' + exec_file, encoding='utf-8').read())
